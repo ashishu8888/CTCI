@@ -21,7 +21,7 @@ public:
         return 1+max(height(root->left),height(root->right));
 
     }
-    
+    // pre-order...
     bool isBalanced(TreeNode* root) {
         if(root == NULL)
         {
