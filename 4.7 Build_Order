@@ -1,0 +1,54 @@
+class Solution {
+public:
+    vector<int> findOrder(int n, vector<vector<int>>& pq) {
+         vector<int> ans,adj[n],indeg(n,0);
+         
+         queue<int> q;
+
+         for(auto x : pq)
+         {
+             adj[x[1]].push_back(x[0]);
+         }
+
+         for(int i=0;i<n;i++)
+         {
+             for(auto x : adj[i])
+             {
+                 indeg[x]++;
+             }
+         }
+
+         for(int i=0;i<n;i++)
+         {
+             if(indeg[i] == 0)
+             {
+                 q.push(i);
+             }
+         }
+
+         while(!q.empty())
+         {
+             int x = q.front();
+            ans.push_back(x);
+             q.pop();
+
+             for(auto node : adj[x])
+             {
+                 indeg[node]--;
+                 if(indeg[node] == 0)
+                 {
+                     q.push(node);
+                 }
+             }
+         }
+
+        if(ans.size()!=n)
+        {
+            return {};
+        }
+
+        return ans;
+
+
+    }
+};
